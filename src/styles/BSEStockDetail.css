@@ -1,0 +1,176 @@
+/* General Reset */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #111;
+  font-family: 'Segoe UI', sans-serif;
+  color: #f1f1f1;
+}
+
+/* Loading and Error States */
+.loading,
+.error {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 100px;
+}
+
+.error {
+  color: #ff5c5c;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #444;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #666;
+}
+
+/* Stock Container */
+.stock-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #1c1f26;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Header */
+.stock-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.stock-header h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.price {
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+}
+
+.price .up {
+  color: #00ff94;
+}
+
+.price .down {
+  color: #ff4c4c;
+}
+
+.percent-change {
+  font-size: 1rem;
+  color: #bbbbbb;
+}
+
+.fetch-time {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 10px;
+}
+
+/* Stock Details Grid */
+.content-section {
+  margin-top: 30px;
+}
+
+.stock-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+  background-color: #232630;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail-label {
+  font-size: 0.9rem;
+  color: #a5a5a5;
+}
+
+.detail-value {
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+/* Performance Section */
+.section-title {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.performance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.performance-card {
+  background-color: #282c34;
+  border-left: 5px solid;
+  padding: 15px 20px;
+  border-radius: 10px;
+  color: #ffffff;
+  transition: transform 0.3s ease;
+}
+
+.performance-card:hover {
+  transform: translateY(-5px);
+}
+
+.performance-label {
+  font-size: 0.95rem;
+  color: #a5a5a5;
+}
+
+.performance-value {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.performance-card.positive {
+  border-color: #00e676;
+}
+
+.performance-card.negative {
+  border-color: #ff5252;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  .stock-container {
+    padding: 20px;
+  }
+
+  .stock-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .price {
+    font-size: 1.1rem;
+  }
+
+  .performance-value {
+    font-size: 1.1rem;
+  }
+}

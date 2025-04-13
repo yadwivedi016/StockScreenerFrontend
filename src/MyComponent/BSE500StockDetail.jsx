@@ -2,53 +2,48 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/StockDetail.css";
-import StockChart from "./Graph";
-import SearchComponent from "./NIFTY50SearchPage";
+import BSESearchPage from "./BSE500SearchPage";
+import BSEStockChart from "./BSEGraph"; // Assuming this is the correct path for the BSE chart component
 
-const StockDetail = () => {
+const BSE500StockDetail = () => {
     const { symbol } = useParams();
     const navigate = useNavigate();
     const [stock, setStock] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [fetchTime, setFetchTime] = useState(null);
-    const [activeTab, setActiveTab] = useState("details"); // Track active tab
+    const [activeTab, setActiveTab] = useState("details"); // Keeping tab structure for future extensibility
+
+    // Handle tab change
+    const handleTabChange = (tab) => {
+        setActiveTab(tab);
+    };
 
     useEffect(() => {
-        let intervalId;
-    
+        setLoading(true);
+        setError(null);
+        setFetchTime(null);
+
         const fetchStockData = async () => {
             const startTime = performance.now(); // Start timing
-            setLoading(true);
-            setError(null);
-            setFetchTime(null);
-    
+
             try {
-                const response = await axios.get(`http://localhost:8000/stockdetail/${symbol}/`);
+                const response = await axios.get(`http://localhost:8000/fetch-bse-500-stock-data/${symbol}/`);
                 setStock(response.data.stock || response.data);
                 const endTime = performance.now(); // End timing
-                setFetchTime((endTime - startTime).toFixed(2));
+                setFetchTime((endTime - startTime).toFixed(2)); // Store time in milliseconds
             } catch (err) {
                 setError("Failed to fetch stock data. Please try again.");
             } finally {
                 setLoading(false);
             }
         };
-    
-        fetchStockData(); // Initial fetch
-    
-        intervalId = setInterval(fetchStockData, 60000); // Fetch every 60 seconds
-    
-        return () => clearInterval(intervalId); // Cleanup on unmount or symbol change
+
+        fetchStockData();
     }, [symbol]);
-    
 
     const handleSearchNavigate = (newSymbol) => {
         navigate(`/stock/${newSymbol}`);
-    };
-
-    const handleTabChange = (tab) => {
-        setActiveTab(tab);
     };
 
     if (loading) {
@@ -67,18 +62,19 @@ const StockDetail = () => {
     return (
         <>
             {/* Pass handleSearchNavigate to SearchComponent */}
-            <SearchComponent onSearch={handleSearchNavigate} />
+            <BSESearchPage onSearch={handleSearchNavigate} />
 
             <div className="stock-container">
                 <div className="stock-header">
-                    <h1>{stock.company_name} ({stock.exchange})</h1>
+                    <h1>{stock.company_name || stock.Company_Name} ({stock.exchange || "BSE"})</h1>
                     <p className="price">
-                        Current Price: <span className={stock.current_price >= stock.previous_close ? "up" : "down"}>
-                            ₹{stock.current_price}
+                        Current Price: <span className={parseFloat(stock.LTP) >= 0 ? "up" : "down"}>
+                            {stock.LTP}
                         </span>
                     </p>
-                    <p>Previous Close: ₹{stock.previous_close}</p>
-                    <p className="percent-change">📉 {stock.percent_change}% Today</p>
+                    <p className="percent-change">
+                    {parseFloat(stock["Change_%"]) >= 0 ? "📈" : "📉"} {stock["Change_%"]} Today
+                    </p>
 
                     {/* Show Fetch Time */}
                     {fetchTime && <p className="fetch-time">⏳ Data fetched in {fetchTime} ms</p>}
@@ -100,31 +96,26 @@ const StockDetail = () => {
                     </div>
                 </div>
 
-                {/* Content sections based on active tab */}
+                {/* Stock Details Grid */}
                 {activeTab === "details" && (
                     <div className="content-section">
-                        {/* Stock Details Grid */}
                         <div className="stock-details">
-                            <DetailRow label="52 Week High" value={`₹${stock.fifty_two_week_high}`} />
-                            <DetailRow label="52 Week Low" value={`₹${stock.fifty_two_week_low}`} />
+                            <DetailRow label="52 Week High" value={stock.fifty_two_week_high} />
+                            <DetailRow label="52 Week Low" value={stock.fifty_two_week_low} />
                             <DetailRow label="Dividend Yield" value={`${stock.dividend_yield}%`} />
-                            <DetailRow label="Book Value" value={`₹${stock.book_value.toFixed(2)}`} />
-                            {/* <DetailRow label="Enterprise Value" value={`₹${(stock.enterprise_value / 1e7).toFixed(2)} Cr`} /> */}
-                            <DetailRow label="Earnings Yield" value={`${stock.earnings_yield.toFixed(2)}%`} />
-                            <DetailRow label="PEG Ratio" value={stock.peg_ratio.toFixed(2)} />
-                            {/* <DetailRow label="Dividend Payout Ratio" value={`${stock.dividend_payout_ratio.toFixed(2)}%`} /> */}
-                            <DetailRow label="Average Volume" value={stock.avg_volume.toLocaleString()} />
-                            <DetailRow label="EPS" value={stock.eps.toFixed(2)} />
-                            <DetailRow label="Revenue Growth (YoY)" value={`${stock.year_revenue_growth.toFixed(2)}%`} />
-                            <DetailRow label="ROCE" value={`${stock.roce}%`} />
-                            {/* <DetailRow label="Revenue" value={`₹${(stock.revenue / 1e7).toFixed(2)} Cr`} /> */}
-                            <DetailRow label="Market Cap" value={`₹${stock.market_cap.toFixed(2)} Cr`} />
-                            <DetailRow label="P/E Ratio" value={stock.price_to_earning} />
-                            <DetailRow label="P/B Ratio" value={stock.price_to_book} />
-                            <DetailRow label="RSI" value={stock.rsi} />
+                            <DetailRow label="Book Value" value={stock.book_value} />
+                            <DetailRow label="Earnings Yield" value={`${stock.earnings_yield}%`} />
+                            <DetailRow label="Dividend Payout Ratio" value={stock.dividend_payout_ratio} />
+                            <DetailRow label="Average Volume" value={stock.avg_volume} />
+                            <DetailRow label="EPS" value={stock.eps} />
+                            <DetailRow label="Market Cap" value={stock.Market_Cap_Cr} />
+                            <DetailRow label="P/E Ratio" value={stock.PE_Ratio} />
+                            <DetailRow label="P/B Ratio" value={stock.PB_Ratio} />
+                            <DetailRow label="RSI" value={stock.RSI} />
+                            <DetailRow label="ROCE" value={stock.ROCE} />
                         </div>
-                        
-                        {/* Performance Section - Now displayed directly after stock details */}
+
+                        {/* Performance Section */}
                         <h2 className="section-title">Performance</h2>
                         <div className="performance-grid">
                             <PerformanceCard label="1 Month" value={stock.price_perchng_1mon} />
@@ -136,10 +127,10 @@ const StockDetail = () => {
                     </div>
                 )}
 
+                {/* Stock Chart */}
                 {activeTab === "graph" && (
                     <div className="content-section">
-                        {/* Stock Chart */}
-                        <StockChart symbol={symbol} />
+                        <BSEStockChart symbol={symbol} />
                     </div>
                 )}
             </div>
@@ -165,4 +156,4 @@ const PerformanceCard = ({ label, value }) => {
     );
 };
 
-export default StockDetail;
+export default BSE500StockDetail;

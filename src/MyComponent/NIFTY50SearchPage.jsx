@@ -17,7 +17,8 @@ const niftyStocks = [
   "LTI Mindtree"
 ];
 
-const SearchComponent = () => {
+
+const NiftySearchPage = () => {
   const [symbol, setSymbol] = useState("");
   const [filteredStocks, setFilteredStocks] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -28,7 +29,7 @@ const SearchComponent = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (symbol.trim()) {
-      navigate(`/stock/${symbol.trim()}`);
+      navigate(`/nifty50stock/${symbol.trim()}`);
       setSymbol("");
       setFilteredStocks([]);
       setSelectedIndex(-1);
@@ -104,4 +105,4 @@ const SearchComponent = () => {
   );
 };
 
-export default SearchComponent;
+export default NiftySearchPage;
