@@ -9,8 +9,9 @@ import StockGraph from "./MyComponent/StockGraph";
 import SelectIndex from "./MyComponent/SelectIndex";
 import "./App.css";
 import BSE500StockDetail from "./MyComponent/BSE500StockDetail";
-import StockChart from "./MyComponent/BSEGraph"; // Assuming this is the correct path for the BSE chart component
+import FinancialData from "./MyComponent/BalanceSheet";
 import BSEStockGraph from "./MyComponent/BSE1dGraph";
+import FinancialDataTable from "./MyComponent/BalanceSheetUpdated";
 
 // Create a Theme Context
 const ThemeContext = createContext();
@@ -38,7 +39,9 @@ function App() {
               <Route path="/nifty50stock/:symbol" element={<StockDetailWrapper />} />
               <Route path="/stock/:symbol/graph" element={<StockGraph />} />
               <Route path="/bsestock/:symbol" element={<BSE500StockDetail />} />
-              <Route path="/bsegraph/:symbol" element={<BSEStockGraph />}/>
+              <Route path="/bse-graph/:symbol" element={<BSEStockGraph />}/>
+              <Route path="/financials/:symbol" element={<FinancialData />} />
+              <Route path="/fin/:symbol" element={<FinancialDataTable />} />
             </Routes>
           </main>
           <Footer />

@@ -1,0 +1,410 @@
+/* =============================
+   Root Variables for Light Mode
+============================= */
+:root {
+    --bg-color: #f8fafc;
+    --text-color: #334155;
+    --text-muted: #64748b;
+    --card-bg: #ffffff;
+    --card-secondary-bg: #f1f5f9;
+    --border-color: rgba(226, 232, 240, 0.8);
+    --shadow-color: rgba(15, 23, 42, 0.06);
+    --shadow-lg: rgba(15, 23, 42, 0.1);
+    --highlight-color: #3b82f6;
+    --highlight-hover: #2563eb;
+    --highlight-secondary: rgba(59, 130, 246, 0.1);
+    --positive-color: #10b981;
+    --positive-text: #047857;
+    --positive-bg: rgba(16, 185, 129, 0.1);
+    --negative-color: #ef4444;
+    --negative-text: #b91c1c;
+    --negative-bg: rgba(239, 68, 68, 0.1);
+    --neutral-bg: #f8fafc;
+    --neutral-text: #64748b;
+    --header-gradient-start: #ffffff;
+    --header-gradient-end: #f8fafc;
+    --card-hover: #f1f5f9;
+    --chart-bg: #ffffff;
+    --accent: #7c3aed;
+    --accent-soft: rgba(124, 58, 237, 0.1);
+    --button-bg: var(--highlight-color);
+    --button-text: #ffffff;
+  }
+  
+  /* =============================
+     Dark Mode
+  ============================= */
+  [data-theme="dark"] {
+    --bg-color: #0f172a;
+    --text-color: #e2e8f0;
+    --text-muted: #94a3b8;
+    --card-bg: #1e293b;
+    --card-secondary-bg: #1a2234;
+    --border-color: rgba(51, 65, 85, 0.6);
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --shadow-lg: rgba(0, 0, 0, 0.3);
+    --highlight-color: #60a5fa;
+    --highlight-hover: #3b82f6;
+    --highlight-secondary: rgba(96, 165, 250, 0.1);
+    --positive-color: #34d399;
+    --positive-text: #059669;
+    --positive-bg: rgba(52, 211, 153, 0.1);
+    --negative-color: #f87171;
+    --negative-text: #dc2626;
+    --negative-bg: rgba(248, 113, 113, 0.1);
+    --neutral-bg: #1e293b;
+    --neutral-text: #94a3b8;
+    --header-gradient-start: #1e293b;
+    --header-gradient-end: #1a2234;
+    --card-hover: #263244;
+    --chart-bg: #1e293b;
+    --accent: #a78bfa;
+    --accent-soft: rgba(167, 139, 250, 0.1);
+    --button-bg: var(--highlight-color);
+    --button-text: #ffffff;
+  }
+  
+  /* =============================
+     Global Elements
+  ============================= */
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    scroll-behavior: smooth;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* =============================
+     Navbar
+  ============================= */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: var(--card-bg);
+    border-bottom: 2px solid var(--border-color);
+    box-shadow: 0 2px 5px var(--shadow-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-brand:hover {
+    color: var(--highlight-color);
+  }
+  
+  .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    padding: 8px;
+    font-size: 1.2rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .theme-toggle:hover {
+    color: var(--highlight-hover);
+    transform: scale(1.1);
+  }
+  
+  /* =============================
+     Balance Sheet Container
+  ============================= */
+  .balance-sheet-container {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  
+  /* =============================
+     Loading Spinner
+  ============================= */
+  .balance-sheet-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  .loading-spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid var(--highlight-color);
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* =============================
+     Error State
+  ============================= */
+  .balance-sheet-error {
+    background-color: var(--negative-bg);
+    border: 1px solid var(--border-color);
+    color: var(--negative-text);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 16px 0;
+  }
+  
+  /* =============================
+     Header and Period Buttons
+  ============================= */
+  .balance-sheet-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .balance-sheet-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-color);
+  }
+  
+  .period-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .period-button {
+    background-color: var(--neutral-bg);
+    border: none;
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: var(--neutral-text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .period-button:hover {
+    background-color: var(--border-color);
+  }
+  
+  .period-button.active {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+  }
+  
+  /* =============================
+     Comparison Cards
+  ============================= */
+  .comparison-view {
+    margin-bottom: 32px;
+  }
+  
+  .comparison-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 16px;
+  }
+  
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  
+  /* =============================
+     Metric Cards
+  ============================= */
+  .metric-card {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+  }
+  
+  .metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  
+  .metric-name {
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--text-color);
+  }
+  
+  .metric-description {
+    font-size: 12px;
+    color: var(--neutral-text);
+    margin-top: 4px;
+  }
+  
+  .growth-indicator {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 4px 8px;
+    border-radius: 16px;
+  }
+  
+  .growth-indicator.positive {
+    background-color: var(--positive-bg);
+    color: var(--positive-text);
+  }
+  
+  .growth-indicator.negative {
+    background-color: var(--negative-bg);
+    color: var(--negative-text);
+  }
+  
+  .growth-indicator.neutral {
+    background-color: var(--neutral-bg);
+    color: var(--neutral-text);
+  }
+  
+  .metric-values {
+    margin-top: 8px;
+  }
+  
+  .current-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-color);
+  }
+  
+  .previous-value {
+    font-size: 14px;
+    color: var(--neutral-text);
+    margin-left: 8px;
+  }
+  
+  /* =============================
+     Balance Sheet Table
+  ============================= */
+  .table-container {
+    overflow-x: auto;
+    margin-top: 16px;
+  }
+  
+  .balance-sheet-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  
+  .balance-sheet-table th,
+  .balance-sheet-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .balance-sheet-table th {
+    background-color: var(--bg-color);
+    font-weight: 600;
+    color: var(--neutral-text);
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+  
+  .balance-sheet-table tr:hover {
+    background-color: var(--neutral-bg);
+  }
+  
+  .sticky-column {
+    position: sticky;
+    left: 0;
+    background-color: var(--card-bg);
+    z-index: 1;
+    border-right: 1px solid var(--border-color);
+  }
+  
+  .balance-sheet-table tr:hover .sticky-column {
+    background-color: var(--neutral-bg);
+  }
+  
+  .row-name {
+    font-weight: 500;
+    color: var(--text-color);
+  }
+  
+  .row-description {
+    font-size: 12px;
+    color: var(--neutral-text);
+  }
+  
+  .cell-value {
+    font-weight: 500;
+    color: var(--text-color);
+  }
+  
+  .cell-growth {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  
+  .cell-growth.positive {
+    color: var(--positive-text);
+  }
+  
+  .cell-growth.negative {
+    color: var(--negative-text);
+  }
+  
+  .cell-growth.neutral {
+    color: var(--neutral-text);
+  }
+  
+  /* =============================
+     Responsive Tweaks
+  ============================= */
+  @media (min-width: 768px) {
+    .balance-sheet-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .balance-sheet-title {
+      margin-bottom: 0;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .comparison-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .balance-sheet-container {
+      padding: 16px;
+    }
+  
+    .cell-growth {
+      display: none;
+    }
+  }
+  
