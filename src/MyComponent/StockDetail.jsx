@@ -4,6 +4,7 @@ import axios from "axios";
 import "../styles/StockDetail.css";
 import StockChart from "./Graph";
 import SearchComponent from "./NIFTY50SearchPage";
+import FinancialDataTable from "./BalanceSheetUpdated"; // Assuming this is the correct path for the balance sheet component
 
 const StockDetail = () => {
     const { symbol } = useParams();
@@ -16,13 +17,13 @@ const StockDetail = () => {
 
     useEffect(() => {
         let intervalId;
-    
+
         const fetchStockData = async () => {
             const startTime = performance.now(); // Start timing
             setLoading(true);
             setError(null);
             setFetchTime(null);
-    
+
             try {
                 const response = await axios.get(`http://localhost:8000/stockdetail/${symbol}/`);
                 setStock(response.data.stock || response.data);
@@ -34,14 +35,14 @@ const StockDetail = () => {
                 setLoading(false);
             }
         };
-    
+
         fetchStockData(); // Initial fetch
-    
+
         intervalId = setInterval(fetchStockData, 60000); // Fetch every 60 seconds
-    
+
         return () => clearInterval(intervalId); // Cleanup on unmount or symbol change
     }, [symbol]);
-    
+
 
     const handleSearchNavigate = (newSymbol) => {
         navigate(`/stock/${newSymbol}`);
@@ -86,17 +87,23 @@ const StockDetail = () => {
 
                 {/* Secondary Navigation Bar - only Details and Graph */}
                 <div className="secondary-navbar">
-                    <div 
-                        className={`nav-item ${activeTab === "details" ? "active" : ""}`} 
+                    <div
+                        className={`nav-item ${activeTab === "details" ? "active" : ""}`}
                         onClick={() => handleTabChange("details")}
                     >
                         Stock Details
                     </div>
-                    <div 
-                        className={`nav-item ${activeTab === "graph" ? "active" : ""}`} 
+                    <div
+                        className={`nav-item ${activeTab === "graph" ? "active" : ""}`}
                         onClick={() => handleTabChange("graph")}
                     >
                         Graph
+                    </div>
+                    <div
+                        className={`nav-item ${activeTab === "balanceSheet" ? "active" : ""}`}
+                        onClick={() => handleTabChange("balanceSheet")}
+                    >
+                        Balance Sheet
                     </div>
                 </div>
 
@@ -123,7 +130,7 @@ const StockDetail = () => {
                             <DetailRow label="P/B Ratio" value={stock.price_to_book} />
                             <DetailRow label="RSI" value={stock.rsi} />
                         </div>
-                        
+
                         {/* Performance Section - Now displayed directly after stock details */}
                         <h2 className="section-title">Performance</h2>
                         <div className="performance-grid">
@@ -142,6 +149,12 @@ const StockDetail = () => {
                         <StockChart symbol={symbol} />
                     </div>
                 )}
+                {activeTab === "balanceSheet" && (
+                <div className="content-section">
+                    <FinancialDataTable symbol={symbol} />
+                </div>
+            )}
+
             </div>
         </>
     );

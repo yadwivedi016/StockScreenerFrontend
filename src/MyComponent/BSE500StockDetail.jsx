@@ -4,6 +4,8 @@ import axios from "axios";
 import "../styles/StockDetail.css";
 import BSESearchPage from "./BSE500SearchPage";
 import BSEStockChart from "./BSEGraph"; // Assuming this is the correct path for the BSE chart component
+// import BalanceSheet from "./BalanceSheet";
+import FinancialDataTable from "./BalanceSheetUpdated"; 
 
 const BSE500StockDetail = () => {
     const { symbol } = useParams();
@@ -43,7 +45,7 @@ const BSE500StockDetail = () => {
     }, [symbol]);
 
     const handleSearchNavigate = (newSymbol) => {
-        navigate(`/stock/${newSymbol}`);
+        navigate(`/bsestock/${newSymbol}`);
     };
 
     if (loading) {
@@ -94,6 +96,12 @@ const BSE500StockDetail = () => {
                     >
                         Graph
                     </div>
+                    <div 
+                        className={`nav-item ${activeTab === "balanceSheet" ? "active" : ""}`} 
+                        onClick={() => handleTabChange("balanceSheet")}
+                    >
+                        Balance Sheet
+                    </div>
                 </div>
 
                 {/* Stock Details Grid */}
@@ -127,12 +135,19 @@ const BSE500StockDetail = () => {
                     </div>
                 )}
 
+
                 {/* Stock Chart */}
                 {activeTab === "graph" && (
                     <div className="content-section">
                         <BSEStockChart symbol={symbol} />
                     </div>
                 )}
+                {activeTab === "balanceSheet" && (
+                    <div className="content-section">
+                        <FinancialDataTable symbol={symbol} />
+                    </div>
+                )}
+                
             </div>
         </>
     );
