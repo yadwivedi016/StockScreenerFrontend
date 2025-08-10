@@ -151,3 +151,157 @@ body {
     transform: rotate(360deg);
   }
 }
+/* Add these styles to your SearchPage.css */
+
+.additional-links-section {
+  margin-top: 40px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.golden-cross-card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border: 2px solid transparent;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  max-width: 400px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
+}
+
+.golden-cross-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #ffd700, #ffed4e, #ffa500);
+  opacity: 0.1;
+  border-radius: 18px;
+  transition: opacity 0.3s ease;
+}
+
+.golden-cross-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+  border-color: #ffd700;
+}
+
+.golden-cross-card:hover::before {
+  opacity: 0.15;
+}
+
+.golden-cross-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  display: inline-block;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+}
+
+.golden-cross-title {
+  color: #ffd700;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+}
+
+.golden-cross-description {
+  color: #e0e0e0;
+  font-size: 1rem;
+  margin-bottom: 25px;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+.golden-cross-button {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #1a1a2e;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.golden-cross-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.5s ease;
+}
+
+.golden-cross-button:hover::before {
+  left: 100%;
+}
+
+.golden-cross-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+  background: linear-gradient(135deg, #ffed4e, #ffd700);
+}
+
+.golden-cross-button:active {
+  transform: translateY(0);
+}
+
+/* Dark theme support */
+[data-theme="dark"] .golden-cross-card {
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  border-color: #333;
+}
+
+[data-theme="dark"] .golden-cross-title {
+  color: #ffd700;
+}
+
+[data-theme="dark"] .golden-cross-description {
+  color: #b0b0b0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .additional-links-section {
+    padding: 15px;
+    margin-top: 30px;
+  }
+  
+  .golden-cross-card {
+    padding: 25px 20px;
+    max-width: 350px;
+  }
+  
+  .golden-cross-title {
+    font-size: 1.5rem;
+  }
+  
+  .golden-cross-description {
+    font-size: 0.9rem;
+  }
+  
+  .golden-cross-button {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+  }
+}

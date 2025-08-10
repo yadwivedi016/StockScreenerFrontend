@@ -130,7 +130,7 @@ const BSEStockChart = ({ symbol }) => {
             border: "1px solid var(--border-color)"
           }}
         >
-          {["1D", "1M", "6M", "1Y", "3Y", "5Y", "10Y"].map((tf) => (
+          {["1D", "6M", "1Y", "3Y", "5Y", "10Y"].map((tf) => (
             <button 
               key={tf} 
               className={`timeframe-button ${tf === timeframe ? "active" : ""}`}

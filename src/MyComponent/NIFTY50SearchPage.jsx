@@ -17,15 +17,12 @@ const niftyStocks = [
   "LTI Mindtree"
 ];
 
-
 const NiftySearchPage = () => {
   const [symbol, setSymbol] = useState("");
   const [filteredStocks, setFilteredStocks] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const navigate = useNavigate();
-
-  
-
+     
   const handleSearch = (e) => {
     e.preventDefault();
     if (symbol.trim()) {
@@ -71,6 +68,15 @@ const NiftySearchPage = () => {
   return (
     <div className="search-container">
       <h1 className="search-title">Looking for a stock?</h1>
+      
+      {/* Golden Cross Link */}
+      <button 
+        onClick={() => navigate('/golden-cross')} 
+        className="golden-cross-button"
+      >
+        ✨ Golden Cross Analysis
+      </button>
+      
       <form onSubmit={handleSearch} className="search-form">
         <div className="search-box">
           <Search className="search-icon" size={20} />
@@ -101,6 +107,7 @@ const NiftySearchPage = () => {
           </ul>
         )}
       </form>
+           
     </div>
   );
 };

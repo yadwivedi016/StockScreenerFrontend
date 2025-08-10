@@ -1,0 +1,239 @@
+/* GoldenCross.css - Using FinancialDataTable Color Scheme */
+
+/* CSS Variables matching your theme */
+:root {
+  --background-color: #0f172a;
+  --card-background: #1e293b;
+  --primary-color: #3b82f6;
+  --primary-text: #f8fafc;
+  --secondary-text: #e2e8f0;
+  --muted-text: #94a3b8;
+  --border-color: #334155;
+  --hover-background: #2d3748;
+  --positive-color: #34d399;
+  --negative-color: #f87171;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 0, 0, 0.5);
+}
+
+.golden-cross-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 2rem;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--primary-text);
+  background-color: var(--background-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px var(--shadow-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.golden-cross-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(52, 211, 153, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.golden-cross-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--primary-text);
+  text-align: center;
+  position: relative;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.75rem;
+}
+
+.golden-cross-title::after {
+  content: 'ELITE STOCK SELECTION';
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.85rem;
+  color: var(--muted-text);
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.loading-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  font-size: 1.25rem;
+  color: var(--secondary-text);
+  font-weight: 500;
+}
+
+.loading-text::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s linear infinite;
+  margin-right: 12px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.stocks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.stock-item {
+  background-color: var(--card-background);
+  border-radius: 10px;
+  padding: 1.5rem;
+  cursor: pointer;
+  color: var(--primary-text);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.stock-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--positive-color));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.stock-item::after {
+  content: '◆';
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 0.8rem;
+  color: var(--muted-text);
+  opacity: 0.6;
+}
+
+.stock-item:hover {
+  transform: translateY(-5px);
+  background-color: var(--hover-background);
+  box-shadow: 0 8px 24px var(--shadow-hover);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.stock-item:hover::before {
+  transform: scaleX(1);
+}
+
+.stock-item:hover::after {
+  color: var(--positive-color);
+  opacity: 1;
+}
+
+.no-stocks-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  color: var(--muted-text);
+  font-size: 1.25rem;
+  text-align: center;
+  background-color: var(--card-background);
+  border-radius: 10px;
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  position: relative;
+}
+
+.no-stocks-text::before {
+  content: '📊';
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  opacity: 0.5;
+}
+
+/* Additional premium touches */
+.section-container {
+  margin-top: 3rem;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.75rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .golden-cross-container {
+    margin: 20px;
+    padding: 1.5rem 1rem;
+  }
+
+  .golden-cross-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stocks-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .stock-item {
+    padding: 1.25rem;
+    font-size: 1.1rem;
+  }
+}
+
+/* Light theme support */
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-color: #fcfcfd;
+    --card-background: #ffffff;
+    --primary-color: #1e40af;
+    --primary-text: #1a365d;
+    --secondary-text: #475569;
+    --muted-text: #64748b;
+    --border-color: #e2e8f0;
+    --hover-background: #f1f5f9;
+    --positive-color: #10b981;
+    --negative-color: #ef4444;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --shadow-hover: rgba(0, 0, 0, 0.1);
+  }
+}

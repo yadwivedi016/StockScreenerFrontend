@@ -12,6 +12,7 @@ import BSE500StockDetail from "./MyComponent/BSE500StockDetail";
 import FinancialData from "./MyComponent/BalanceSheet";
 import BSEStockGraph from "./MyComponent/BSE1dGraph";
 import FinancialDataTable from "./MyComponent/BalanceSheetUpdated";
+import GoldenCross from "./MyComponent/GoldenCross";
 
 // Create a Theme Context
 const ThemeContext = createContext();
@@ -42,6 +43,7 @@ function App() {
               <Route path="/bse-graph/:symbol" element={<BSEStockGraph />}/>
               <Route path="/financials/:symbol" element={<FinancialData />} />
               <Route path="/fin/:symbol" element={<FinancialDataTable />} />
+              <Route path="/golden-cross" element={<GoldenCross />}/>
             </Routes>
           </main>
           <Footer />

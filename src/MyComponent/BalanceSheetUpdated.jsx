@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';  
-import './FinancialDataTable.css';
+import '../styles/FinancialDataTable.css'; // Import your CSS styles
 
 
 export default function FinancialDataTable() {
