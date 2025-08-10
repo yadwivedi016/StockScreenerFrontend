@@ -10,7 +10,7 @@
 
 ---
 
-## ⚙️ Installation & Setup  
+## ⚙️ Installation & Setup
 
 ```bash
 # 1. Clone repository
